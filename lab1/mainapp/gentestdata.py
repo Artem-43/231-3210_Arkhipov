@@ -21,3 +21,6 @@ def gentestdata():
             newToy.save()
     # <<< тут заканчивается транзакция
     print('OK gentestdata()')
+
+if __name__=='__main__':
+        gentestdata()
