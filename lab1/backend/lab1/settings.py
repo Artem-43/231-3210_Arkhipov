@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# В контейнере путь к .env
+load_dotenv(dotenv_path=BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -80,11 +84,11 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql', # адаптер для связи Django ORM с Postgres, требует pip install psycopg[binary,pool]
-        'NAME': 'lab1_db', # название базы данных
-        'USER': 'django',  # внутренний пользователь БД, нужно создать вручную или отдельным скриптом
-        'PASSWORD': 'qwerty123', # пароль этого пользователя
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'NAME': os.getenv('POSTGRES_DB','myServer'), # название базы данных
+        'USER': os.getenv('POSTGRES_USER','django'),  # внутренний пользователь БД, нужно создать вручную или отдельным скриптом
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD','qwerty123'), # пароль этого пользователя
+        'HOST': os.getenv('DATABASE_HOST', 'postgres-service'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     },
 }
 
@@ -124,7 +128,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'          # URL для доступа к статике
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Папка, куда collectstatic будет складывать файлы
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
