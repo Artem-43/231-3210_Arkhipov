@@ -12,7 +12,7 @@ Toy parseToyFromJson(const QByteArray &data)
     QJsonObject obj = doc.object();
     toy.setId(obj["id"].toInt());
     toy.setName(obj["name"].toString());
-    toy.setPrice(obj["price"].toDouble());
+    toy.setPrice(obj["price"].toString());
     toy.setCategory(obj["category"].toString());
     toy.setSize(obj["size"].toString());
 
@@ -34,7 +34,7 @@ QList<Toy> parseToyListFromJson(const QByteArray &data)
             Toy toy;
             toy.setId(obj["id"].toInt());
             toy.setName(obj["name"].toString());
-            toy.setPrice(obj["price"].toDouble());
+            toy.setPrice(obj["price"].toString());
             toy.setCategory(obj["category"].toString());
             toy.setSize(obj["size"].toString());
             toys.append(toy);

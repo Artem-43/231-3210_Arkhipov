@@ -8,7 +8,7 @@ class Toy
 public:
     Toy() = default;
 
-    Toy(int id, const QString &name, double price,
+    Toy(int id, const QString &name, QString price,
         const QString &category, const QString &size)
         : m_id(id), m_name(name), m_price(price),
         m_category(category), m_size(size) {}
@@ -16,14 +16,14 @@ public:
     // --- Геттеры ---
     int id() const { return m_id; }
     QString name() const { return m_name; }
-    double price() const { return m_price; }
+    QString price() const { return m_price; }
     QString category() const { return m_category; }
     QString size() const { return m_size; }
 
     // --- Сеттеры ---
     void setId(int id) { m_id = id; }
     void setName(const QString &name) { m_name = name; }
-    void setPrice(double price) { m_price = price; }
+    void setPrice(const QString &price) { m_price = price; }
     void setCategory(const QString &category) { m_category = category; }
     void setSize(const QString &size) { m_size = size; }
 
@@ -67,7 +67,7 @@ public:
 private:
     int m_id{};
     QString m_name;
-    double m_price{};
+    QString m_price{};
     QString m_category;
     QString m_size;
 };
